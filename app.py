@@ -12,7 +12,7 @@ try:
     creds_dict = json.loads(creds_json)
     gc = gspread.service_account_from_dict(creds_dict)
     # Reemplaza "RegistrosAPI" con el nombre exacto de tu Hoja de Cálculo
-    spreadsheet = gc.open("RegistrosAPI")
+    spreadsheet = gc.open("Usuarios api")
     worksheet = spreadsheet.sheet1
 except Exception as e:
     print(f"Error al inicializar Google Sheets: {e}")
