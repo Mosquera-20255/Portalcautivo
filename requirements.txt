@@ -15,7 +15,6 @@ google-auth-oauthlib==1.2.2
 gspread==6.2.1
 gunicorn==23.0.0
 idna==3.10
-=======
 gunicorn==23.0.0
 39d3354b5b07ab5f4b292ee641d5f84279c162b1
 itsdangerous==2.2.0
