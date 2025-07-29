@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Portal WiFi - Registro</title>
+    <style>
+        body { background-color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; }
+        .container { max-width: 400px; margin: 60px auto; padding: 30px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 128, 0, 0.2); border-top: 8px solid #007f3e; }
+        h2 { text-align: center; color: #007f3e; margin-bottom: 30px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #ffcc00; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; color: #333; cursor: pointer; }
+        button:hover { background-color: #f5b800; }
+        .footer { text-align: center; font-size: 12px; color: #999; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Usuario</h2>
+        <form id="registroForm">
+            <label for="nombre_completo">Nombre Completo:</label>
+            <input type="text" id="nombre_completo" name="nombre_completo" required>
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" required>
+                <option value="">Seleccione</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+            
+            <button type="submit">Registrarse</button>
+        </form>
+        <div class="footer">Alcaldía de Mosquera</div>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch('/registrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.mensaje);
+                if (result.mensaje.includes('exitosamente')) {
+                    event.target.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudo conectar con el servidor.');
+            });
+        });
+    </script>
+</body>
+</html>
